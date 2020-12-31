@@ -1,41 +1,38 @@
 package ex3.ChatProgram;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+
 
 public class ClientDescriptor implements StringConsumer, StringProducer{
     private String name = "";
-    private List<StringConsumer> consumers;
+    StringConsumer consumer;
 
     public ClientDescriptor() {
-        consumers = new ArrayList<>();
+
     }
 
+    //user join or left the chat
     @Override
     public void consume(String str) throws IOException {
-        if(name == "") {
+        if(str.equals("disconnect")){
+            consumer.consume(name + " has left the chat");
+            removeConsumer(consumer);
+        }
+        else if (name.equals("")) {
             name = str;
-
-            for(StringConsumer consumer : consumers) {
-                consumer.consume(name + "joined to the chat (:");
-            }
-        }
-        else {
-            for (StringConsumer consumer : consumers) {
-                consumer.consume(name +"message:" + str);
-            }
-        }
+            consumer.consume(name + " has joined the chat!");
+        } else
+            consumer.consume(name + ": " + str);
 
     }
 
     @Override
     public void addConsumer(StringConsumer sc) {
-        consumers.add(sc);
+        consumer = sc;
     }
 
     @Override
     public void removeConsumer(StringConsumer sc) {
-        consumers.remove(sc);
+        consumer = null;
     }
 }

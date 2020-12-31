@@ -14,7 +14,7 @@ public class ServerApplication {
         MessageBoard mb = new MessageBoard();
 
         try {
-            server = new ServerSocket(1300, 5);
+            server = new ServerSocket(1400, 5);
         } catch (IOException e) {
             e.printStackTrace();
         }
