@@ -125,7 +125,7 @@ public class ClientGUI implements StringConsumer, StringProducer{
 
         frameChat.setLayout(new FlowLayout());
 
-        ////add the text box,button and header to the places in the window
+        //add the text box,button and header to the places in the window
         displayHead.add(headChat);
         displayText.add(messageBoard);
         writeText.add(textMessage);
